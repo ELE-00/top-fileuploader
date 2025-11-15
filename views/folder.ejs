@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Folder</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <div class="headerSection">
+        <% if (user) {%>
+            <p class="headerText"><a href="/">Home</a></p>
+            <p class="headerText"><a href="/logout">Log out</a></p>
+        <% } else { %>
+            <p class="headerText"><a href="/signup">Sign up</a></p>
+            <p class="headerText"><a href="/login">Log in</a></p>
+        <% } %>
+    </div>
+    
+    <div class="Wrapper">
+        <!-- welcome message and message form -->
+        <div class="contentSection">
+                <h1 class="msgFormHeader">Welcome to FileUploader <%= user.username %></h1>
+                <div class="contentDisplay">
+
+                <form action="/upload" enctype="multipart/form-data" method="post">
+                    <div class="form-group">
+                        <input type="file" class="form-control-file" name="uploaded_file">
+                        <input type="hidden" name="folderId" value="<%= folder.id %>">
+                        <input type="submit" value="Upload" class="loginBn">
+                    </div>
+                </form>
+
+                <form action="/delete-folder" method="post">
+                    <div class="deleteFolderWrapper">
+                        <input type="hidden" name="folderId" value="<%= folder.id %>">
+                        <input type="submit" value="Delete folder" class="folderDelBtn">
+                    </div>
+                </form>
+
+                <div class="header grid-row">
+                    <span>Name</span>
+                    <span>Type</span>
+                    <span>Size</span>
+                    <span>Created</span>
+                    <span></span>
+                </div>
+
+                 <% files.forEach((file) => { %>
+                    <div class="header grid-row">
+                        <span><%= file.name %></span>
+                        <span>File</span>
+                        <span>
+                            <% if(file.size >= 1048576){ %>
+                                <%= (file.size / (1024 * 1024)).toFixed(2) %> MB
+                            <% } else { %>
+                                <%= (file.size / 1024).toFixed(2) %> KB 
+                            <% } %>
+                        </span>
+                        <span>
+                        <%= file.createdAt.getDate().toString().padStart(2,'0') %>/
+                        <%= (file.createdAt.getMonth() + 1).toString().padStart(2,'0') %>/
+                        <%= file.createdAt.getFullYear() %> 
+                        <%= file.createdAt.getHours().toString().padStart(2,'0') %>:
+                        <%= file.createdAt.getMinutes().toString().padStart(2,'0') %> 
+                        </span>
+
+                        <div class="optionsBtnWrapper">
+                            <a href="<%= file.path %>"> <button class="optionsBtn"> <img src="assets/dlBtn.png" alt="dlBtn.png" class="optionsIcon"></img> </button> </a>
+
+                            <form method="POST" action="/delete-file">
+                                <input type="hidden" name="filePublic_id" value="<%= file.publicId %>">
+                                <input type="hidden" name="fileDbId" value="<%= file.id %>">
+                                <input type="hidden" name="folderId" value="<%= folder.id %>">
+                                <button type="submit" class="optionsBtn"> <img src="assets/delBtn.png" alt="delBtn.png" class="optionsIcon"></img> </button>  
+                            </form>
+                        </div>
+                    </div>
+                <% }) %> 
+
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,2 @@
+Transaction Date,Type,Order,Card Brand,Card Source,Payout Status,Payout Date,Available On,Amount,Fee,Net,Checkout,Payment Method Name,Presentment Amount,Presentment Currency,Currency,VAT
+2025-04-24 20:17:26 +0100,charge,#4201069,visa,online,paid,2025-04-29,2025-04-29,28.80,0.82,27.98,#44821221900622,card,28.80,EUR,EUR,0.00

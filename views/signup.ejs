@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Log-in</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <div class="headerSection">
+        <% if (user) {%>
+            <p class="headerText"><a href="/">Home</a></p>
+            <p class="headerText"><a href="/logout">Log out</a></p>
+        <% } else { %>
+            <p class="headerText"><a href="/">Home</a></p>
+            <p class="headerText"><a href="/signup">Sign up</a></p>
+        <% } %>
+    </div>
+
+
+
+  <div class="signupFormWrapper">
+
+    <h1 class="loginLabel" >Sign up</h1>
+    
+
+    <% if (typeof error !== "undefined") { %>
+      <div style="color: red;"><%= error %></div>
+    <% } %>
+
+    <form class="signupForm"  method="POST" action="/signup">
+
+        <label class="loginLabel" >Username:</label>
+        <input type="text" placeholder="Jack1993" name="userName" required></input>
+
+        <label class="loginLabel">Email:</label>
+        <input type="email" placeholder="JackBlack@gmail.com" name="email" required></input>
+
+        <label class="loginLabel">Password:</label>
+        <input type="password" name="password" required></input>
+
+        <label class="loginLabel">Confirm Password:</label>
+        <input type="password" name="passwordConfirm" required></input>
+
+        <button class="loginBn" type="Submit">Submit</button>
+
+        <p>Already have an account? Log-in <a class="Link" href="/login">here</a></p>
+
+    </form>
+  </div>
+</body>
+</html>
+
+
+
+
+
