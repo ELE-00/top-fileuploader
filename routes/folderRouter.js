@@ -120,3 +120,19 @@ folderRouter.get("/download/:id", async (req, res) => {
         res.status(500).send("Failed to download file");
     }
 });
+
+
+
+
+
+// Thank you. Now I need your opinion.
+
+// Here is the links ot the next topics and projects I need to cover in the correct order:
+// 1. https://www.theodinproject.com/lessons/nodejs-api-basics
+// 2. https://www.theodinproject.com/lessons/nodejs-api-security
+// 3. https://www.theodinproject.com/lessons/node-path-nodejs-blog-api
+// 4. https://www.theodinproject.com/lessons/nodejs-testing-routes-and-controllers
+// 5. https://www.theodinproject.com/lessons/node-path-nodejs-testing-database-operations
+// 6. https://www.theodinproject.com/lessons/nodejs-where-s-waldo-a-photo-tagging-app
+// 7. https://www.theodinproject.com/lessons/nodejs-messaging-app
+// 8. https://www.theodinproject.com/lessons/node-path-nodejs-odin-book

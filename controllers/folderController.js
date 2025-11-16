@@ -41,9 +41,9 @@ async function getFileByFolderId(folderId){
 async function uploadFile(file, userId, folderId) {
     // Configure Cloudinary
     cloudinary.config({ 
-        cloud_name: 'drc8fbob7', 
-        api_key: '721558893276548', 
-        api_secret: 'nL4QHMeKOcmd8oKMIOQqf1dGZRg'
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+        api_key: process.env.CLOUDINARY_API_KEY, 
+        api_secret: process.env.CLOUDINARY_API_SECRET
     });
 
     // Determine the Cloudinary resource type
@@ -82,9 +82,9 @@ async function uploadFile(file, userId, folderId) {
 async function deleteFile(filePublic_id, fileDbId){
 //configuration:
     cloudinary.config({ 
-        cloud_name: 'drc8fbob7', 
-        api_key: '721558893276548', 
-        api_secret: 'nL4QHMeKOcmd8oKMIOQqf1dGZRg'
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+        api_key: process.env.CLOUDINARY_API_KEY, 
+        api_secret: process.env.CLOUDINARY_API_SECRET
     });
 
     try{
