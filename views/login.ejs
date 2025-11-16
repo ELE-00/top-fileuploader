@@ -3,18 +3,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Log-in</title>
+  <title>Login</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
     <div class="headerSection">
-        <% if (user) {%>
-            <p class="headerText"><a href="/logout">Log out</a></p>
-        <% } else { %>
-            <p class="headerText"><a href="/">Home</a></p>
-            <p class="headerText"><a href="/signup">Sign up</a></p>
-        <% } %>
+        <h1 class="nameHeader">Uploadify</h1>
     </div>
 
   <div class="loginFormWrapper">
@@ -30,6 +25,7 @@
         <input id="password" name="password" type="password" />
         <button class="loginBn" type="submit">Log In</button>
       </form>
+      <p class="msgFormText">New account? <a class="Link" href="/signup">Sign up here</a></p>
     <%}%>
   </div>
 </body>

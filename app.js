@@ -42,6 +42,19 @@ app.use(
   })
 );
 
+function ensureLoggedIn(req, res, next) {
+    // Paths that should be public even when not logged in:
+    const publicPaths = ["/login", "/signup"];
+
+    if (!req.isAuthenticated() && !publicPaths.includes(req.path)) {
+        return res.redirect("/login");
+    }
+
+    next();
+}
+
+
+
 // Initialize Passport
 initializePassport(passport);
 app.use(passport.initialize())
@@ -52,11 +65,6 @@ app.use(passport.session());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-//Config of endpoints
-app.use("/login", authRouter);
-app.use("/", folderRouter);
-app.use("/signup", userRouter);
-
 //Log-out
 app.get("/logout", (req, res, next) => {
   req.logout((err) => {
@@ -66,6 +74,13 @@ app.get("/logout", (req, res, next) => {
     res.redirect("/");
   });
 });
+
+
+//Config of endpoints
+app.use("/login", authRouter);
+app.use("/signup", userRouter);
+app.use("/", ensureLoggedIn, folderRouter);
+
 
 
 //Ports

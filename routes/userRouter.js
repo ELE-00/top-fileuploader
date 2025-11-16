@@ -4,7 +4,7 @@ const userRouter = Router();
 const {createUser} = require("../controllers/userController.js")
 
 userRouter.get("/", (req,res) => {
-    res.render("signup", {user: req.user})
+    res.render("signup")
 })
 
 //Sign up 

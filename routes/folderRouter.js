@@ -1,6 +1,7 @@
 const  {Router} = require("express");
 const folderRouter = Router();
 const multer  = require('multer')
+const prisma = require('../script.js')
 
 const {createFolder, getFoldersbyUserId, getFileByFolderId, getFileByUserId, uploadFile, deleteFile, deleteFolder} = require("../controllers/folderController.js")
 
@@ -79,7 +80,7 @@ folderRouter.post('/delete-file', async function (req, res) {
 
 });
 
-//Delete file
+//Delete folder
 folderRouter.post('/delete-folder', async function (req, res) {
 
     const userId = req.user.id;
@@ -95,3 +96,27 @@ folderRouter.post('/delete-folder', async function (req, res) {
 
 });
 
+//Download files
+const axios = require("axios");
+
+folderRouter.get("/download/:id", async (req, res) => {
+    const fileId = parseInt(req.params.id);
+    const file = await prisma.file.findUnique({ where: { id: fileId }});
+
+    if (!file) return res.status(404).send("File not found");
+
+    try {
+        // Fetch file from Cloudinary
+        const response = await axios.get(file.path, { responseType: "stream" });
+
+        // Set headers for download
+        res.setHeader("Content-Disposition", `attachment; filename="${file.name}"`);
+        res.setHeader("Content-Type", response.headers["content-type"]);
+
+        // Pipe the Cloudinary response to the client
+        response.data.pipe(res);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Failed to download file");
+    }
+});
